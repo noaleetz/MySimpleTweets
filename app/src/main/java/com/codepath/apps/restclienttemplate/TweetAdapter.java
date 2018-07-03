@@ -16,10 +16,13 @@ import java.util.List;
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> {
     // 1- pass in tweets array (give adapter data)
 
-    private List<Tweet> mtweets
+    private List<Tweet> mtweets;
+    Context context;
 
     public TweetAdapter(List<Tweet> tweets) {
         mtweets = tweets;
+
+
 
 
     }
@@ -28,7 +31,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
+        context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View tweetView = inflater.inflate(R.layout.item_tweet,parent,false);
