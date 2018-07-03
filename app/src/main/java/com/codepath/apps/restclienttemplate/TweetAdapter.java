@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
 import java.util.List;
@@ -50,13 +51,20 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         //populate views w this data
         holder.tvUsername.setText(tweet.user.name);
         holder.tvBody.setText(tweet.body);
+
+        //load image w glide
+        Glide.with(holder.itemView.getContext())
+                .load(tweet.user.profileImageUrl)
+                .into(holder.ivProfileImage);
+
+
     }
 
     @Override
     public int getItemCount() {
         return mtweets.size();
     }
-    //4- make viewholder class
+    //4- make a ViewHolder class
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView ivProfileImage;
