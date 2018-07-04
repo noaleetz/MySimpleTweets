@@ -21,7 +21,7 @@
 
     <TextView
         android:id="@+id/tvUserName"
-        android:layout_width="329dp"
+        android:layout_width="265dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="5dp"
@@ -30,6 +30,7 @@
         android:textStyle="bold" />
 
     <TextView
+        android:maxLines="2"
         android:id="@+id/tvBody"
         android:layout_width="329dp"
         android:layout_height="29dp"
@@ -38,4 +39,12 @@
         android:layout_toEndOf="@+id/ivProfileImage"
         android:text="TextView"
         android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/tvCreatedAgo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:text="TextView" />
 </RelativeLayout>
