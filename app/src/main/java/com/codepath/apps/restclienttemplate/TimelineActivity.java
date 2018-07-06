@@ -31,8 +31,7 @@ public class TimelineActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeContainer;
 
 
-
-    private TwitterClient  client;
+    private TwitterClient client;
     TweetAdapter tweetAdapter;
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
@@ -40,8 +39,6 @@ public class TimelineActivity extends AppCompatActivity {
 
     private final int COMPOSE_REQUEST_CODE = 10;
     private final int COMPOSE_RESULT_CODE = 20;
-
-
 
 
     @Override
@@ -67,13 +64,10 @@ public class TimelineActivity extends AppCompatActivity {
                 android.R.color.holo_red_light);
 
 
-
-
-
         client = TwitterApp.getRestClient(this);
 
         //find recycler view
-        rvTweets = (RecyclerView)  findViewById(R.id.rvTweet);
+        rvTweets = (RecyclerView) findViewById(R.id.rvTweet);
         //init array list aka data source
         tweets = new ArrayList<>();
         //construct adapter FROM DATA
@@ -82,8 +76,6 @@ public class TimelineActivity extends AppCompatActivity {
         //rv setup includes (layout manager, use adapter)
         rvTweets.setLayoutManager(new LinearLayoutManager(this));
         rvTweets.setAdapter(tweetAdapter);
-
-
 
 
         populateTimeline();
@@ -153,15 +145,14 @@ public class TimelineActivity extends AppCompatActivity {
             composeTweet();
             return true;
 
-        // TODO- add profile button functionality to go to profile activity
-        //} else if (id == R.id.miProfile) {
-          //  profileView();
+            // TODO- add profile button functionality to go to profile activity
+            //} else if (id == R.id.miProfile) {
+            //  profileView();
             //return true;
         }
         return super.onOptionsItemSelected(item);
 
     }
-
 
 
     private void composeTweet() {
@@ -177,57 +168,53 @@ public class TimelineActivity extends AppCompatActivity {
     // TODO - Here: profileView() method
 
 
-
-
-
-        private void populateTimeline() {
+    private void populateTimeline() {
 
         client.getHomeTimeline(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-       //         Log.d("Twitter Client",response.toString());
+                //         Log.d("Twitter Client",response.toString());
                 //iterate through json array
                 //for e entry, get data from json object
-                for (int i =0;i<response.length();i++){
+                for (int i = 0; i < response.length(); i++) {
                     //convert e object to tweet model
                     //add tweet model to data source
                     //notify adapter of changes
                     try {
-                        Tweet tweet = Tweet.fromJSON(response.getJSONObject(i)) ;
+                        Tweet tweet = Tweet.fromJSON(response.getJSONObject(i));
                         tweets.add(tweet);
-                        tweetAdapter.notifyItemInserted(tweets.size()-1);
-                    }
-                    catch(JSONException e){
+                        tweetAdapter.notifyItemInserted(tweets.size() - 1);
+                    } catch (JSONException e) {
                         e.printStackTrace();
 
-                        }
-
                     }
+
                 }
+            }
 
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-               Log.d("Twitter Client",response.toString());
+                Log.d("Twitter Client", response.toString());
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
-                Log.d("Twitter Client",errorResponse.toString());
+                Log.d("Twitter Client", errorResponse.toString());
                 throwable.printStackTrace();
 
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Log.d("Twitter Client",errorResponse.toString());
+                Log.d("Twitter Client", errorResponse.toString());
                 throwable.printStackTrace();
 
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Log.d("Twitter Client",responseString);
+                Log.d("Twitter Client", responseString);
                 throwable.printStackTrace();
             }
         });
@@ -259,15 +246,14 @@ public class TimelineActivity extends AppCompatActivity {
 
                 // ...the data has come back, add new items to your adapter...
 
-                for (int i = 0; i < response.length(); i++){
+                for (int i = 0; i < response.length(); i++) {
 
 
                     try {
-                        Tweet tweet = Tweet.fromJSON(response.getJSONObject(i)) ;
+                        Tweet tweet = Tweet.fromJSON(response.getJSONObject(i));
                         tweets.add(tweet);
-                        tweetAdapter.notifyItemInserted(tweets.size()-1);
-                    }
-                    catch(JSONException e){
+                        tweetAdapter.notifyItemInserted(tweets.size() - 1);
+                    } catch (JSONException e) {
                         e.printStackTrace();
 
                     }
@@ -288,6 +274,9 @@ public class TimelineActivity extends AppCompatActivity {
 
         });
     }
+
+// TODO- setup listeners
+
 
 
 

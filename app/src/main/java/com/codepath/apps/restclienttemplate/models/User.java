@@ -22,6 +22,8 @@ public class User {
     public String profileImageUrl;
     public boolean isVerified;
 
+
+
     public String getName(){ return name; }
     public long getUid(){ return uid; }
     public String getScreenName(){ return screenName; }
@@ -30,6 +32,8 @@ public class User {
 
 
     public static User currentUser;
+
+
 
     public User(){}
 

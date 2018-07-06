@@ -1,6 +1,7 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
+import org.parceler.Parcels;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -23,26 +26,28 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
     private List<Tweet> mtweets;
     Context context;
-
     public TweetAdapter(List<Tweet> tweets) {
         mtweets = tweets;
 
-
-
-
     }
 
-    //2- inflate EACH row, cache refs into ViewHolder
+    //2- inflate EACH row, cache references into ViewHolder
 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View tweetView = inflater.inflate(R.layout.item_tweet,parent,false);
+        final View tweetView = inflater.inflate(R.layout.item_tweet,parent,false);
 
-        ViewHolder viewHolder = new ViewHolder(tweetView);
+        final ViewHolder viewHolder = new ViewHolder(tweetView);
+
+        //getItemViewType();
+
+
         return viewHolder;
+
+
     }
 
 
@@ -50,18 +55,18 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //get data according to pos
+        //get data according to position
         Tweet tweet = mtweets.get(position);
-        //populate views w this data
+        //populate views with this data
         holder.tvUsername.setText(tweet.user.name);
         holder.tvBody.setText(tweet.body);
 
-        //load image w glide
+        //load image with glide
         Glide.with(holder.itemView.getContext())
                 .load(tweet.user.profileImageUrl)
                 .into(holder.ivProfileImage);
 
-        // TODO - parse timestamp to abbreivate "minutes ago" to "m"
+        // TODO - parse timestamp to abbreviate "minutes ago" to "m"
 
         holder.tvCreatedAt.setText(getRelativeTimeAgo(tweet.createdAt));
 
@@ -92,7 +97,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     }
     //4- make a ViewHolder class
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView ivProfileImage;
         public TextView tvUsername;
         public TextView tvBody;
@@ -102,21 +107,30 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public ViewHolder(View itemView) {
             super(itemView);
 
+            itemView.setOnClickListener(this);
+
             //findViewById lookups
             ivProfileImage = (ImageView) itemView.findViewById(R.id.ivProfileImage);
             tvUsername = (TextView) itemView.findViewById(R.id.tvUserName);
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             tvCreatedAt = (TextView) itemView.findViewById(R.id.tvCreatedAgo);
 
-
-
-
-
-
-
+        
 
         }
 
+
+        @Override
+        public void onClick(View v) {
+
+            // create intent to pass tweet parcel to tweetDetailActivity
+            Intent i = new Intent(context, TweetDetailActivity.class);
+
+            i.putExtra("tweet", Parcels.wrap(mtweets.get(getAdapterPosition())));
+            context.startActivity(i);
+
+
+        }
     }
 
     public void clear() {
