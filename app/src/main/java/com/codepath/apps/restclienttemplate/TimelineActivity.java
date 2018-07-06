@@ -36,7 +36,7 @@ public class TimelineActivity extends AppCompatActivity {
     TweetAdapter tweetAdapter;
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
-    MenuItem miActionProgressItem;
+    MenuItem pbProgressAction;
 
     private final int COMPOSE_REQUEST_CODE = 10;
     private final int COMPOSE_RESULT_CODE = 20;
@@ -93,12 +93,12 @@ public class TimelineActivity extends AppCompatActivity {
 
     public void showProgressBar() {
         // Show progress item
-        miActionProgressItem.setVisible(true);
+        pbProgressAction.setVisible(true);
     }
 
     public void hideProgressBar() {
         // Hide progress item
-        miActionProgressItem.setVisible(false);
+        pbProgressAction.setVisible(false);
     }
 
     public void launchComposeView() {
@@ -124,15 +124,17 @@ public class TimelineActivity extends AppCompatActivity {
 
 // TODO- Progress Bar
 
-    @Override
+
+    /*@Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         // Store instance of the menu item containing progress
-        //miActionProgressItem = menu.findItem(R.id.miActionProgress);
+        pbProgressAction = menu.findItem(R.id.pbProgressAction);
         // Extract the action-view from the menu item
-        //ProgressBar v =  (ProgressBar) MenuItemCompat.getActionView(miActionProgressItem);
+        ProgressBar v =  (ProgressBar) MenuItemCompat.getActionView(pbProgressAction);
         // Return to finish
         return super.onPrepareOptionsMenu(menu);
     }
+    */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

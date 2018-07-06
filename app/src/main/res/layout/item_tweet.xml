@@ -38,7 +38,9 @@
         android:layout_marginLeft="5dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:text="TextView"
-        android:textSize="10sp" />
+        android:textSize="10sp"
+        
+        />
 
     <TextView
         android:id="@+id/tvCreatedAgo"

@@ -44,6 +44,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
     implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
 
     implementation 'org.parceler:parceler-api:1.1.6'
     annotationProcessor 'org.parceler:parceler:1.1.6'
