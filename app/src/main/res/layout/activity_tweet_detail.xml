@@ -7,6 +7,15 @@
     android:fitsSystemWindows="true"
     tools:context="com.codepath.apps.mysimpletweets.activities.DisplayTweetActivity">
 
+    <TextView
+        android:id="@+id/tvWordRetweets"
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
+        android:layout_alignStart="@+id/tvWordLikes"
+        android:layout_below="@+id/tvWordLikes"
+        android:text="Retweets"
+        android:textSize="24sp" />
+
     <ImageView
         android:id="@+id/ivProfileImage"
         android:layout_width="70dp"
@@ -54,6 +63,16 @@
         android:textSize="15dp" />
 
     <TextView
+        android:id="@+id/tvRetweets"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_alignStart="@+id/ivProfileImage"
+        android:layout_below="@+id/tvWordLikes"
+        android:text="43"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
         android:id="@+id/tvLikes"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
@@ -88,12 +107,11 @@
         android:textSize="24sp" />
 
     <ImageButton
-        android:id="@+id/btheart"
+        android:id="@+id/btHeart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/tvLikes"
-        android:layout_marginEnd="77dp"
+        android:layout_alignEnd="@+id/etReply"
+        android:layout_alignTop="@+id/tvWordLikes"
         app:srcCompat="@drawable/ic_heart_filled" />
 
     <ImageButton
@@ -101,7 +119,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/tvBody"
-        android:layout_alignTop="@+id/tvLikes"
+        android:layout_alignTop="@+id/tvWordLikes"
         app:srcCompat="@drawable/ic_retweet" />
 
     <ImageButton

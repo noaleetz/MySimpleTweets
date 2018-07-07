@@ -1,5 +1,10 @@
 package com.codepath.apps.restclienttemplate.models;
 
+import android.content.Context;
+
+import com.codepath.apps.restclienttemplate.TwitterApp;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcel;
@@ -52,12 +57,34 @@ public class Tweet {
         return mediaUrl;
     }
 
+
+
+    public void favorite(Context ctx, JsonHttpResponseHandler handler) {
+        TwitterApp.getRestClient(ctx).favorite(uid, favorited ^= true, handler);
+        favoriteCount += favorited ? 1 : -1;
+
+    }
+
+    public void retweet(Context ctx, JsonHttpResponseHandler handler) {
+        TwitterApp.getRestClient(ctx).retweet(uid, retweeted ^= true, handler);
+        retweetCount += retweeted ? 1 : -1;
+    }
+
+
     public Tweet(){}
 
 
     //deserialize json
     public static Tweet fromJSON(JSONObject jsonObject) throws JSONException {
         Tweet tweet = new Tweet();
+
+        if(jsonObject.has("retweeted_status")) {
+            // extract all data needed from root tweet
+            tweet.retweetedBy = User.fromJSON(jsonObject.getJSONObject("user"));
+            // discard root tweet (i.e. replace it with original tweet)
+            jsonObject = jsonObject.getJSONObject("retweeted_status");
+        }
+
         //get info from json
         tweet.body = jsonObject.getString("text");
         tweet.uid = jsonObject.getLong ("id");

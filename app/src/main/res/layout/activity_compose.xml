@@ -57,7 +57,7 @@
         android:layout_height="30dp"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/tb"
-        android:text="TextView"
+        android:text="140 char left"
         android:textStyle="italic" />
 
     <EditText
